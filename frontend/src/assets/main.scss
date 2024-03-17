@@ -1,0 +1,61 @@
+@import 'base';
+
+.home-content {
+  padding: 0 50px 50px 50px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  &__info{
+    width: max-content;
+    display: flex;
+    flex-direction: row;
+
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 20px;
+
+    @media screen and (max-width: 1200px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    @media screen and (max-width: 768px) {
+      grid-template-columns: repeat(1, 1fr);
+    }
+
+    &-item {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      border-radius: 8px;
+      background-color: #7dbcea;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+      box-shadow: 0 1px 5px rgba(0, 0, 0, 0.15);
+      min-height: 125px;
+
+      a {
+        font-weight: bold;
+        color: white;
+      }
+      h4{
+        margin: initial;
+      }
+
+      &:hover {
+        -webkit-box-shadow: 3px 6px 23px 10px rgba(255, 255, 255, 0.15);
+        -moz-box-shadow: 3px 6px 23px 10px rgba(255, 255, 255, 0.15);
+        box-shadow: 3px 6px 23px 10px rgba(255, 255, 255, 0.15);
+        transition: 0.2s;
+      }
+    }
+  }
+}
+.global-relative{
+  position: relative;
+}
+.global-absolut{
+  position: absolute;
+}
