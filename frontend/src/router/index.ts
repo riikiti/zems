@@ -1,10 +1,9 @@
-import {createRouter, createWebHistory} from 'vue-router'
+import { createRouter, createWebHistory } from 'vue-router'
+import PlatformView from '@/views/PlatformView.vue'
+import ProjectView from '@/views/ProjectView.vue'
+import TaskView from '@/views/TaskView.vue'
+import { useAuthStore } from '@/stores/auth'
 import HomeView from '../views/HomeView.vue'
-import PlatformView from "@/views/PlatformView.vue";
-import ProjectView from "@/views/ProjectView.vue";
-import TaskView from "@/views/TaskView.vue";
-import {useAuthStore} from "@/stores/auth";
-
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
@@ -12,7 +11,7 @@ const router = createRouter({
         {
             path: '/',
             name: 'home',
-            component: HomeView,
+            component: HomeView
         },
         {
             path: '/platform',
@@ -38,21 +37,20 @@ const router = createRouter({
     ]
 })
 router.beforeEach(async (to, from, next) => {
-    const authStore=useAuthStore()
-    const authenticatedUser = JSON.parse(localStorage.getItem('auth'))
-    const token=localStorage.getItem('JWT_SECRET')
-    if (to.matched.some(record => record.meta.requiresAuth)) {
+    const authStore = useAuthStore()
+    const token = localStorage.getItem('JWT_SECRET')
+    if (to.matched.some((record) => record.meta.requiresAuth)) {
         if (token) {
             await authStore.fetchUser()
             next()
-        }else {
+        } else {
             next('/')
         }
-    }else{
+    } else {
         if (token) {
             next('/platform')
         }
         next()
     }
-});
+})
 export default router

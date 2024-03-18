@@ -1,9 +1,9 @@
 <template>
   <div>
-    <home-content/>
+    <home-content />
   </div>
 </template>
 <script lang="ts" setup>
 
-import HomeContent from "@/components/HomeContent.vue";
+import HomeContent from '@/components/HomeContent.vue'
 </script>

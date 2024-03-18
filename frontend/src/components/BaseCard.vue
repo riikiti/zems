@@ -1,22 +1,22 @@
 <script setup lang="ts">
-import {h} from "vue";
-import {DeleteOutlined, EditOutlined} from "@ant-design/icons-vue";
-interface IProps{
+import { h } from 'vue'
+import { DeleteOutlined, EditOutlined } from '@ant-design/icons-vue'
+
+interface IProps {
   title:string
 }
 
-const props=defineProps<IProps>()
-const emits=defineEmits<{
+defineProps<IProps>()
+const emits = defineEmits<{
   (e:'edit'):void,
   (e:'delete'):void
 }>()
-
 
 </script>
 
 <template>
   <div class="home-content__grid-item card global-relative">
-    <div>{{title}}</div>
+    <div>{{ title }}</div>
     <slot name="additional" />
     <div class="global-absolut edit-btn">
       <a-tooltip title="Edit">

@@ -1,3 +1,3 @@
-import type {ITaskTime} from "@/services/models/task";
+import type { ITaskTime } from '@/services/models/task'
 
-export {ITaskTime}
+export { ITaskTime }

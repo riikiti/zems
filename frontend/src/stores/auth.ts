@@ -1,31 +1,29 @@
-import {defineStore} from 'pinia'
-import personalRepository from "@/repository/personalRepository";
+import { defineStore } from 'pinia'
+import personalRepository from '@/repository/personalRepository.ts'
 
  export const useAuthStore = defineStore('auth', {
     state: () => ({
         isAuth: false,
         authTokenKey: 'JWT_SECRET',
-        user: null,
+        user: null
     }),
     actions: {
         async fetchUser() {
             try {
                 const response = await personalRepository.profile()
-                const {data} = response
+                const { data } = response
                 this.user = data
-                if(this.user){
-                    this.isAuth=true
+                if (this.user) {
+                    this.isAuth = true
                 }
-            }
-            catch (e) {
+            } catch (e) {
                 console.log(e)
             }
         },
         async refresh() {
             try {
-                console.log("123")
                 const response = await personalRepository.refresh()
-                const {data} = response
+                const { data } = response
                 const newToken = data.original.access_token
                 localStorage.setItem(this.authTokenKey, newToken)
                 this.isAuth = true
@@ -35,13 +33,11 @@ import personalRepository from "@/repository/personalRepository";
         },
         async login(params) {
             const response = await personalRepository.login(params)
-            const {data} = response
-            console.log(data)
+            const { data } = response
             const newToken = data.access_token
             localStorage.setItem(this.authTokenKey, newToken)
             this.isAuth = true
-            await this.fetchUser();
-
+            await this.fetchUser()
         },
         logout() {
             this.removeToken()
@@ -50,26 +46,25 @@ import personalRepository from "@/repository/personalRepository";
             localStorage.removeItem(this.authTokenKey)
             localStorage.removeItem('auth')
             this.isAuth = false
-            this.user=null
+            this.user = null
         },
         async register(params) {
             const response = await personalRepository.register(params)
-            const {data} = response
-            console.log(data)
+            const { data } = response
             const newToken = data.token.original.access_token
             localStorage.setItem(this.authTokenKey, newToken)
             this.isAuth = true
         }
     },
-    getters:{
+    getters: {
         isLoginIn(state) {
             return state.isAuth
         }
     },
-    persist: true,
+    persist: true
 })
 
-/*Делаем стор доступным глобально вне setup*/
-export function useAuth(){
+/* Делаем стор доступным глобально вне setup */
+export function useAuth() {
      return useAuthStore()
 }

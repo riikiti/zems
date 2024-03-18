@@ -5,9 +5,6 @@
   </div>
 </template>
 
-<script setup>
-</script>
-
 <style scoped lang="scss">
 .footer-content {
   display: flex;

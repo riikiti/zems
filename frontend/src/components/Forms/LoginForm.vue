@@ -1,32 +1,30 @@
 <template>
   <a-form
-      :model="formState"
-      name="basic"
-      autocomplete="off"
-      ref="loginRef"
-      layout="vertical"
+    ref="loginRef"
+    :model="formState"
+    name="basic"
+    autocomplete="off"
+    layout="vertical"
   >
     <a-form-item
-        label="Почта"
-        name="email"
-        :rules="[{ required: true, message: 'Please input your email!' }]"
+      label="Почта"
+      name="email"
+      :rules="[{ required: true, message: 'Please input your email!' }]"
     >
-      <a-input v-model:value="formState.email"/>
+      <a-input v-model:value="formState.email" />
     </a-form-item>
 
     <a-form-item
-        label="Пароль"
-        name="password"
-        :rules="[{ required: true, message: 'Please input your password!' }]"
+      label="Пароль"
+      name="password"
+      :rules="[{ required: true, message: 'Please input your password!' }]"
     >
-      <a-input-password v-model:value="formState.password"/>
+      <a-input-password v-model:value="formState.password" />
     </a-form-item>
-
-
   </a-form>
 </template>
 <script lang="ts" setup>
-import {reactive, ref} from 'vue';
+import { reactive, ref } from 'vue'
 
 interface FormState {
   email: string;
@@ -35,10 +33,10 @@ interface FormState {
 
 const formState = reactive<FormState>({
   email: '',
-  password: '',
-});
+  password: ''
+})
 
-const loginRef=ref(null)
+const loginRef = ref(null)
 const emits = defineEmits<{
   (e: 'validated', data: FormState): void
   (e: 'rejected', data: any): void
@@ -49,13 +47,12 @@ const validate = () => {
     if (errors) {
       emits('validated', errors)
     } else {
-      console.log(errors)
       emits('rejected', errors)
     }
   })
 }
 
 defineExpose({
-  validate,
+  validate
 })
 </script>
